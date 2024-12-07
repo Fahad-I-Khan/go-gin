@@ -78,7 +78,7 @@ Run the following commands to install the necessary Go dependencies for the proj
 ```bash
 go get github.com/gin-gonic/gin
 ```
-2. Install PostgreSQL driver for Go:
+2. **Install PostgreSQL driver** for Go:
 
 ```bash
 go get github.com/lib/pq
@@ -90,27 +90,36 @@ go get github.com/lib/pq
 ```bash
 go install github.com/swaggo/swag/cmd/swag@latest
 ```
-4. **Install CORS middleware for Gin** (to handle cross-origin requests):
+
+4. **Install Swagger UI for Gin**:
+
+```bash
+go get github.com/swaggo/gin-swagger
+go get github.com/swaggo/files
+```
+These packages allow you to serve the Swagger UI within your Gin application.
+
+5. **Install CORS middleware for Gin** (to handle cross-origin requests):
 
 ```bash
 go get github.com/gin-contrib/cors
 ```
-5. **Install Swagger UI for Gin**:
+6. **Install Swagger UI for Gin**:
 
 ```bash
 go get github.com/swaggo/gin-swagger
 ```
-6. **Optional**: Run `go mod tidy` to clean up the `go.mod` file and download any missing dependencies:
+7. **Optional**: Run `go mod tidy` to clean up the `go.mod` file and download any missing dependencies:
 
 ```bash
 go mod tidy
 ```
-7. **Run Swag Init**: Generate the Swagger documentation in the project. This creates a `docs` directory that contains the API docs.
+8. **Run Swag Init**: Generate the Swagger documentation in the project. This creates a `docs` directory that contains the API docs. **Important**: You should run `swag init` whenever you change your API code or Swagger comments to regenerate the Swagger documentation.
 
 ```bash
 swag init
 ```
-
+This will scan your Go code and generate the Swagger documentation in the `docs` folder. **Make sure to run** `swag init` each time you modify API routes or add/modify Swagger comments in your code to keep the documentation up-to-date.
 ### 6. Stopping the Application
 To stop the application, use the following command:
 
