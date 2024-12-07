@@ -4,21 +4,24 @@ This is a simple API for managing users using the **Gin web framework**, **Postg
 
 ## Table of Contents
 
-1. [Project Overview](#project-overview)
+1. [Technologies Used](#technologies-used)
 2. [Features](#features)
 3. [Prerequisites](#prerequisites)
 4. [Setup Instructions](#setup-instructions)
-5. [API Endpoints](#api-endpoints)
-6. [Dependencies](#dependencies)
-7. [Swagger UI](#swagger-ui)
+- [Step 1: Clone the Repository](#step-1-clone-the-repository)
+- [Step 2: Install Go Dependencies](#step-2-install-go-dependencies)
+5. [How to Run the Application](#how-to-run-the-application)
+6. [API Endpoints](#api-endpoints)
+7. [Dependencies](#dependencies)
+8. [Swagger Documentation](#swagger-documentation)
 
-## Project Overview
-
-- **Gin**: A web framework for Go (Golang) for building APIs.
-- **Swagger**: For API documentation.
-- **PostgreSQL**: A relational database used to store user data.
-- **Docker**: For containerizing the application and the PostgreSQL database.
-- **Docker Compose**: For managing multi-container applications.
+## Technologies Used
+- **Go (Golang)**: The backend programming language used to implement the API.
+- **Gin**: A lightweight web framework for Go used for routing and handling HTTP requests.
+- **PostgreSQL**: Relational database management system used to store user data.
+- **Swagger**: Used for API documentation and providing a UI for interacting with the API.
+- **Docker**: Containerization tool to run the application and database in isolated containers.
+- **Docker Compose**: Tool for defining and running multi-container Docker applications.
 
 ## Features
 
@@ -58,7 +61,7 @@ It ensures that both services are linked together and can communicate.
 
 ## Setup Instructions
 
-### 1. Clone the repository
+### Step 1: Clone the repository
 
 First, clone the repository to your local machine:
 
@@ -67,38 +70,45 @@ git clone https://github.com/Fahad-I-Khan/go-gin-gorm.git
 cd go-gin-gorm
 ```
 
-### 2. Start the PostgreSQL container
-Start the `go_db` container first to ensure the PostgreSQL database is up and running before starting the Go application:
+## Step 2: Install Go Dependencies
+Run the following commands to install the necessary Go dependencies for the project:
+
+1. **Install Gin** - the web framework used in this project:
 
 ```bash
-docker-compose up -d go_db
+go get github.com/gin-gonic/gin
 ```
-
-This starts the `go_db` container in detached mode (`-d`).
-It ensures that the PostgreSQL database is running before you attempt to connect to it.
-
-### 3. Build Docker Containers
-Once the `go_db` container is up and running, you can now build the Go application container:
+2. Install PostgreSQL driver for Go:
 
 ```bash
-docker-compose build
+go get github.com/lib/pq
 ```
-- This builds the `go-app` Docker image based on the instructions in the `Dockerfile`.
+3. **Install Swagger dependencies** for API documentation generation:
 
-### 4. Start the Go application container
-Now that the PostgreSQL container is running and the application image is built, you can start the Go application container:
+- **Install Swag CLI**: This is a command-line tool used to generate Swagger documentation from Go comments.
 
 ```bash
-docker-compose up go-app
+go install github.com/swaggo/swag/cmd/swag@latest
 ```
-- This starts the `go-app` container in detached mode (`-d`).
-The Go application will now be able to connect to the PostgreSQL database because the `go_db` container is already running.
-
-### 5. Access the Application
-Swagger UI for API documentation can be accessed at:
+4. **Install CORS middleware for Gin** (to handle cross-origin requests):
 
 ```bash
-http://localhost:8000/swagger
+go get github.com/gin-contrib/cors
+```
+5. **Install Swagger UI for Gin**:
+
+```bash
+go get github.com/swaggo/gin-swagger
+```
+6. **Optional**: Run `go mod tidy` to clean up the `go.mod` file and download any missing dependencies:
+
+```bash
+go mod tidy
+```
+7. **Run Swag Init**: Generate the Swagger documentation in the project. This creates a `docs` directory that contains the API docs.
+
+```bash
+swag init
 ```
 
 ### 6. Stopping the Application
@@ -108,6 +118,23 @@ To stop the application, use the following command:
 docker-compose down
 ```
 This will stop and remove the containers, but the data in the PostgreSQL container persists due to the `pgdata` volume.
+
+## How to Run the Application
+### Step 1: Build and Start Docker Containers
+You can start the Go application and PostgreSQL database using Docker Compose.
+
+1. Build the Docker images and start the containers in the background:
+
+```bash
+docker-compose -d go_db
+docker-compose build
+docker-compose up -d go-app
+```
+Here's what each command does:
+
+- `docker-compose -d go_db`: Starts the PostgreSQL container in detached mode.
+- `docker-compose build`: Builds the Go application Docker image.
+- `docker-compose up -d go-app`: Starts the Go application container in detached mode.
 
 ## API Endpoints
 The following endpoints are available in the application:
@@ -187,10 +214,9 @@ To install dependencies locally (if running outside Docker):
 go mod tidy
 ```
 
-## Swagger UI
-After starting the application, you can access the Swagger UI at:
-
+## Swagger Documentation
+To view the API documentation with Swagger, navigate to the following URL once the application is running:
 ```bash
-http://localhost:8000/swagger
+http://localhost:8000/swagger/index.html
 ```
-Swagger will display all the available API endpoints, their descriptions, and request/response details.
+This will open the Swagger UI, where you can interact with all the available API endpoints and see the API documentation.
