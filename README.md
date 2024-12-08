@@ -16,12 +16,13 @@ This is a simple API for managing users using the **Gin web framework**, **Postg
 8. [Swagger Documentation](#swagger-documentation)
 
 ## Technologies Used
-- **Go (Golang)**: The backend programming language used to implement the API.
-- **Gin**: A lightweight web framework for Go used for routing and handling HTTP requests.
-- **PostgreSQL**: Relational database management system used to store user data.
-- **Swagger**: Used for API documentation and providing a UI for interacting with the API.
-- **Docker**: Containerization tool to run the application and database in isolated containers.
-- **Docker Compose**: Tool for defining and running multi-container Docker applications.
+
+![Go](https://img.shields.io/badge/Language-Go-blue) ![Gin](https://img.shields.io/badge/Framework-Gin-brightgreen) ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue) ![Swagger](https://img.shields.io/badge/API-Swagger-orange) ![Docker](https://img.shields.io/badge/Docker-Enabled-blue) ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Used-blueviolet)
+
+## Description
+
+This is a simple RESTful API built using the **Go** programming language with the **Gin** framework, connected to a **PostgreSQL** database. The API documentation is powered by **Swagger**, and the project is containerized using **Docker** and **Docker Compose**.
+
 
 ## Features
 
